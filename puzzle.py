@@ -100,25 +100,26 @@ class GameGrid(Frame):
         while self.matrix[index[0]][index[1]] != 0:
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
-Menu = Tk()
 
 def StartMenu():
-     Label(Menu, text="2048",fg="#edc22e",font="Verdana 40 bold italic").pack()
-     Button(Menu, text="Start",font="Verdana 40 bold italic",command=Start).pack()
-     Button(Menu, text="Help",font="Verdana 40 bold italic",command=Help).pack()
-     Button(Menu, text="Exit",font="Verdana 40 bold italic",command=Close).pack()
-     Menu.mainloop()
+    Label(Menu, text="2048",bg="#edc22e",fg="white",font="Verdana 40 bold italic").pack()
+    Button(Menu, text="Start",bg="#f67c5f",fg="white",font="Verdana 40 bold italic",command=Start).pack()
+    Button(Menu, text="Help",bg="#edcf72",fg="white",font="Verdana 40 bold italic",command=Help).pack()
+    Button(Menu, text="Exit",bg="#edc53f",fg="white",font="Verdana 40 bold italic",command=Menu.destroy).pack()
+    Menu.mainloop()
 
 def Start():
-    cl=Close()
+    cl = Close()
     gamegrid = GameGrid()
+    
 def Help():
     P_Help = Tk()
-    Label(P_Help, text="wasd\njojak").pack()
-    Button(P_Help, text="Exit",command=P_Help.destroy).pack()
+    Label(P_Help, text="wasd\njojak",bg="black",fg="white",font="Verdana 40 bold italic").pack()
+    Button(P_Help, text="Exit",bg="gray",fg="white",font="Verdana 40 bold italic",command=P_Help.destroy).pack()
+
 def Close():
     Menu.destroy()
 
-
+Menu = Tk()
 game = StartMenu()
             
