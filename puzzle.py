@@ -122,7 +122,6 @@ class GameGrid(Frame):
         frame.pack()
         endLabel=Label(frame, text="You "+state +"!" , font="Verdana").pack()
         tryAgainB=Button(frame, text="Try Again",width=30, command=self.tryAgain).pack()
-        menuB=Button(frame, text="Go to Main", width=30, command=self.gomenu).pack()
         exitB=Button(frame, text="Exit", width=30, command=self.game_ending).pack()
 #>>>>>>> 063cf65b15c8ea62f74989fa297c15f1f2c748c0
 
@@ -147,7 +146,7 @@ def Start():
     
 def Help():
     P_Help = Tk()
-    Label(P_Help, text="wasd\njojak",bg="black",fg="white",font="Verdana 40 bold italic").pack()
+    Label(P_Help, text="How To Play?\nw : move up\na : move left\ns : move down\nd : move right",bg="black",fg="white",font="Verdana 40 bold italic").pack()
     Button(P_Help, text="Exit",bg="gray",fg="white",font="Verdana 40 bold italic",command=P_Help.destroy).pack()
 
 def Close():
