@@ -3,17 +3,16 @@ from logic import *
 from random import *
 
 SIZE = 500
-GRID_LEN = 4
 GRID_PADDING = 10
 
 BACKGROUND_COLOR_GAME = "#92877d"
 BACKGROUND_COLOR_CELL_EMPTY = "#9e948a"
 BACKGROUND_COLOR_DICT = {   2:"#eee4da", 4:"#ede0c8", 8:"#f2b179", 16:"#f59563", \
                             32:"#f67c5f", 64:"#f65e3b", 128:"#edcf72", 256:"#edcc61", \
-                            512:"#edc850", 1024:"#edc53f", 2048:"#edc22e" }
+                            512:"#edc850", 1024:"#edc53f", 2048:"#edc22e",4096:"#f2b179" }
 CELL_COLOR_DICT = { 2:"#776e65", 4:"#776e65", 8:"#f9f6f2", 16:"#f9f6f2", \
                     32:"#f9f6f2", 64:"#f9f6f2", 128:"#f9f6f2", 256:"#f9f6f2", \
-                    512:"#f9f6f2", 1024:"#f9f6f2", 2048:"#f9f6f2" }
+                    512:"#f9f6f2", 1024:"#f9f6f2", 2048:"#f9f6f2",4096:"#f9f6f2" }
 FONT = ("Verdana", 40, "bold")
 
 KEY_UP_ALT = "\'\\uf700\'"
@@ -64,7 +63,7 @@ class GameGrid(Frame):
         return randint(0, GRID_LEN - 1)
 
     def init_matrix(self):
-        self.matrix = new_game(4)
+        self.matrix = new_game(GRID_LEN)
 
         self.matrix=add_two(self.matrix)
         self.matrix=add_two(self.matrix)
@@ -87,12 +86,13 @@ class GameGrid(Frame):
                 self.matrix = add_two(self.matrix)
                 self.update_grid_cells()
                 done=False
+                a = GRID_LEN
                 if game_state(self.matrix)=='win':
-                    self.grid_cells[1][1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
-                    self.grid_cells[1][2].configure(text="Win!",bg=BACKGROUND_COLOR_CELL_EMPTY)
+                    self.grid_cells[a // 2 - 1][a // 2  - 1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
+                    self.grid_cells[a // 2  - 1][a // 2 ].configure(text="Win!",bg=BACKGROUND_COLOR_CELL_EMPTY)
                 if game_state(self.matrix)=='lose':
-                    self.grid_cells[1][1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
-                    self.grid_cells[1][2].configure(text="Lose!",bg=BACKGROUND_COLOR_CELL_EMPTY)
+                    self.grid_cells[a // 2  - 1][a // 2  - 1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
+                    self.grid_cells[a // 2  - 1][a // 2 ].configure(text="Lose!",bg=BACKGROUND_COLOR_CELL_EMPTY)
 
 
     def generate_next(self):
@@ -100,5 +100,25 @@ class GameGrid(Frame):
         while self.matrix[index[0]][index[1]] != 0:
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
+Menu = Tk()
 
-gamegrid = GameGrid()
+def StartMenu():
+     Label(Menu, text="2048",fg="#edc22e",font="Verdana 40 bold italic").pack()
+     Button(Menu, text="Start",font="Verdana 40 bold italic",command=Start).pack()
+     Button(Menu, text="Help",font="Verdana 40 bold italic",command=Help).pack()
+     Button(Menu, text="Exit",font="Verdana 40 bold italic",command=Close).pack()
+     Menu.mainloop()
+
+def Start():
+    cl=Close()
+    gamegrid = GameGrid()
+def Help():
+    P_Help = Tk()
+    Label(P_Help, text="wasd\njojak").pack()
+    Button(P_Help, text="Exit",command=P_Help.destroy).pack()
+def Close():
+    Menu.destroy()
+
+
+game = StartMenu()
+            

@@ -7,6 +7,7 @@
 # code easily while grading your problem set.
 from random import *
 
+GRID_LEN = 4
 #######
 #Task 1a#
 #######
@@ -15,6 +16,7 @@ from random import *
 # Points to note:
 # Matrix elements must be equal but not identical
 # 1 mark for creating the correct matrix
+
 
 def new_game(n):
     matrix = []
@@ -32,7 +34,9 @@ def new_game(n):
 # Must ensure that it is created on a zero entry
 # 1 mark for creating the correct loop
 
+#
 def add_two(mat):
+    print(len(mat[0]))
     a=randint(0,len(mat)-1)
     b=randint(0,len(mat)-1)
     while(mat[a][b]!=0):
@@ -73,6 +77,7 @@ def game_state(mat):
         if mat[j][len(mat)-1]==mat[j+1][len(mat)-1]:
             return 'not over'
     return 'lose'
+
 
 ###########
 # Task 2a #
@@ -124,22 +129,25 @@ def transpose(mat):
 # Check the down one. Reverse/transpose if ordered wrongly will give you wrong result.
 
 def cover_up(mat):
-    new=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    if GRID_LEN == 4:
+        new=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    elif GRID_LEN == 6:
+        new=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
     done=False
-    for i in range(4):
+    for i in range(GRID_LEN):
         count=0
-        for j in range(4):
+        for j in range(GRID_LEN):
             if mat[i][j]!=0:
                 new[i][count]=mat[i][j]
                 if j!=count:
                     done=True
                 count+=1
-    return (new,done)
+    return (new, done)
 
 def merge(mat):
     done=False
-    for i in range(4):
-         for j in range(3):
+    for i in range(GRID_LEN):
+         for j in range(GRID_LEN-1):
              if mat[i][j]==mat[i][j+1] and mat[i][j]!=0:
                  mat[i][j]*=2
                  mat[i][j+1]=0
@@ -156,7 +164,7 @@ def up(game):
         game=temp[0]
         done=done or temp[1]
         game=cover_up(game)[0]
-        game=transpose(game)
+        #game=transpose(game)
         return (game,done)
 
 def down(game):
