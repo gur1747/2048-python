@@ -36,7 +36,6 @@ def new_game(n):
 
 #
 def add_two(mat):
-    print(len(mat[0]))
     a=randint(0,len(mat)-1)
     b=randint(0,len(mat)-1)
     while(mat[a][b]!=0):

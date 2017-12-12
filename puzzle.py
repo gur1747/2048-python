@@ -78,6 +78,20 @@ class GameGrid(Frame):
                     self.grid_cells[i][j].configure(text=str(new_number), bg=BACKGROUND_COLOR_DICT[new_number], fg=CELL_COLOR_DICT[new_number])
         self.update_idletasks()
         
+    def tryAgain(self):
+        print("try again")
+        self.destroy()
+        self.__init__()
+        
+    def game_ending(self):
+        self.master.destroy()
+        exit()
+        print("end")
+
+    def gomenu(self):
+        print("gomenu")
+        self.destroy()
+        
     def key_down(self, event):
         key = repr(event.char)
         if key in self.commands:
@@ -88,11 +102,29 @@ class GameGrid(Frame):
                 done=False
                 a = GRID_LEN
                 if game_state(self.matrix)=='win':
+#<<<<<<< HEAD
                     self.grid_cells[a // 2 - 1][a // 2  - 1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[a // 2  - 1][a // 2 ].configure(text="Win!",bg=BACKGROUND_COLOR_CELL_EMPTY)
                 if game_state(self.matrix)=='lose':
                     self.grid_cells[a // 2  - 1][a // 2  - 1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[a // 2  - 1][a // 2 ].configure(text="Lose!",bg=BACKGROUND_COLOR_CELL_EMPTY)
+#=======
+                    self.game_end_window("Win")
+
+                if game_state(self.matrix)=='lose':
+                    self.game_end_window("Lose")
+
+    def game_end_window(self, state):
+        global window
+        window= Tk()
+        window.title("Game End")
+        frame=Frame(window)
+        frame.pack()
+        endLabel=Label(frame, text="You "+state +"!" , font="Verdana").pack()
+        tryAgainB=Button(frame, text="Try Again",width=30, command=self.tryAgain).pack()
+        menuB=Button(frame, text="Go to Main", width=30, command=self.gomenu).pack()
+        exitB=Button(frame, text="Exit", width=30, command=self.game_ending).pack()
+#>>>>>>> 063cf65b15c8ea62f74989fa297c15f1f2c748c0
 
 
     def generate_next(self):
@@ -101,6 +133,7 @@ class GameGrid(Frame):
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
 
+#<<<<<<< HEAD
 def StartMenu():
     Label(Menu, text="2048",bg="#edc22e",fg="white",font="Verdana 40 bold italic").pack()
     Button(Menu, text="Start",bg="#f67c5f",fg="white",font="Verdana 40 bold italic",command=Start).pack()
@@ -123,3 +156,7 @@ def Close():
 Menu = Tk()
 game = StartMenu()
             
+#=======
+#gamegrid = GameGrid()
+##test
+#>>>>>>> 063cf65b15c8ea62f74989fa297c15f1f2c748c0
