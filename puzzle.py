@@ -105,13 +105,11 @@ class GameGrid(Frame):
 #<<<<<<< HEAD
                     self.grid_cells[a // 2 - 1][a // 2  - 1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[a // 2  - 1][a // 2 ].configure(text="Win!",bg=BACKGROUND_COLOR_CELL_EMPTY)
+                    self.game_end_window("Win")
                 if game_state(self.matrix)=='lose':
                     self.grid_cells[a // 2  - 1][a // 2  - 1].configure(text="You",bg=BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[a // 2  - 1][a // 2 ].configure(text="Lose!",bg=BACKGROUND_COLOR_CELL_EMPTY)
 #=======
-                    self.game_end_window("Win")
-
-                if game_state(self.matrix)=='lose':
                     self.game_end_window("Lose")
 
     def game_end_window(self, state):
